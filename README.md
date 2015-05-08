@@ -1,6 +1,9 @@
 Duplo
 =====
 
+[![Gem Version](https://badge.fury.io/rb/duplo.svg)](https://rubygems.org/gems/duplo)
+[![Build Status](https://travis-ci.org/topalovic/duplo.svg?branch=master)](https://travis-ci.org/topalovic/duplo)
+
 Generating nested collections with minimum effort.
 
 ```
