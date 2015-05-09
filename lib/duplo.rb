@@ -73,9 +73,13 @@ module Duplo
     n ? range.take(n) : range.to_a
   end
 
+  def respond_to_missing?(method_name, *)
+    toy = method_name.to_s
+    Duplo.can_build?(toy) || super
+  end
+
   def method_missing(method_name, *arguments, &block)
     toy = method_name.to_s
-
     if Duplo.can_build? toy
       Duplo.build toy, *arguments, &block
     else

@@ -3,8 +3,10 @@ require "spec_helper"
 describe Duplo do
 
   let(:default_size) { Duplo.default_size }
+  let(:valid_bricks)   { %w[a aa s ss h hh a0 a1h a2s33h44] }
+  let(:invalid_bricks) { %w[A n 0 11 1s a2s33t44] }
 
-  it "has a version number" do
+    it "has a version number" do
     expect(Duplo::VERSION).not_to be nil
   end
 
@@ -15,10 +17,21 @@ describe Duplo do
     end
   end
 
-  describe ".can_build?" do
-    let(:valid_bricks)   { %w[a aa s ss h hh a0 a1h a2s33h44] }
-    let(:invalid_bricks) { %w[A n 0 11 1s a2s33t44] }
+  describe ".respond_to?" do
+    it "returns true for valid bricks" do
+      valid_bricks.each do |brick|
+        expect(Duplo.respond_to? brick).to be true
+      end
+    end
 
+    it "returns false for invalid bricks" do
+      invalid_bricks.each do |brick|
+        expect(Duplo.respond_to? brick).to be false
+      end
+    end
+  end
+
+  describe ".can_build?" do
     it "can build valid bricks" do
       valid_bricks.each do |brick|
         expect(Duplo.can_build? brick).to be true
