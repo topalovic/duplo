@@ -4,22 +4,22 @@ Duplo
 [![Gem Version](https://badge.fury.io/rb/duplo.svg)](https://rubygems.org/gems/duplo)
 [![Build Status](https://travis-ci.org/topalovic/duplo.svg?branch=master)](https://travis-ci.org/topalovic/duplo)
 
-Generating nested collections with minimum effort.
+Generate nested collections with minimum effort.
 
 ```
-.-===============-.
-| ( ) ( ) ( ) ( ) |
-| ( ) ( ) ( ) ( ) |
-'-----------------' ndt.
+ .-===============-.
+ | ( ) ( ) ( ) ( ) |
+ | ( ) ( ) ( ) ( ) |
+ '-----------------' ndt.
 ```
 
 
 ## Usage
 
-Say you like matrices (bear with me), but not rolling them out by hand
-or writing nested loops to populate them. You might need a nested hash
-to test something real quick in your console, but generating it can be
-a royal PITA.
+Let's say you like matrices (bear with me), but not rolling them out
+by hand or writing nested loops to populate them. Or you might need a
+few nested hashes to test something real quick in the console, but
+generating them can be a royal PITA.
 
 So how about this:
 
@@ -44,20 +44,28 @@ a3a4 { rand }
 #     [0.37651300630626683, 0.5035024403835663,  0.8237420938739567,  0.7611012983149591]]
 ```
 
-Accessing the current entry path is easy peasy:
+Accessing the current entry path is easy peasy. Have an identity
+matrix:
+
+```ruby
+I4 = a4a4 { |i, j| i == j ? 1 : 0  }
+# => [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+```
+
+Have I mentioned that you can go up to an arbitrary number of
+dimensions?
 
 ```ruby
 a3a3a2 { |i,j,k| [i,j,k].join(":") }
 # => [[["0:0:0", "0:0:1"], ["0:1:0", "0:1:1"], ["0:2:0", "0:2:1"]],
 #     [["1:0:0", "1:0:1"], ["1:1:0", "1:1:1"], ["1:2:0", "1:2:1"]],
 #     [["2:0:0", "2:0:1"], ["2:1:0", "2:1:1"], ["2:2:0", "2:2:1"]]]
- ```
+```
 
-Have I mentioned that you can go up to an arbitrary number of
-dimensions? Just watch out, it might get sluggish with higher dims due
-to the recursive approach under the hood.
+Heads up, it might get a bit sluggish with higher dims due to the
+recursive approach under the hood.
 
-So how 'bout them Hashes:
+Now how 'bout them Hashes:
 
 ```ruby
 h3h2h2 { |path| "I'm a #{path.join}" }
@@ -79,7 +87,7 @@ ah2s3 { abc.sample(2).join }
 ```
 
 You get the picture. If you're *really* bored, you can spell those out
-for fun:
+loud:
 
 ```ruby
 Duplo.spell "ah2s0"
@@ -88,7 +96,7 @@ Duplo.spell "ah2s0"
 
 Note that I've omitted a dim for the root array in that last
 example. It defaults to 5, so `as2h` means the same thing as
-`a5s2h5`. You can easily change the default size like this:
+`a5s2h5`. You can easily change it like this:
 
 ```ruby
 Duplo.default_size = 3
@@ -100,8 +108,10 @@ alphabet as an array (as seen in the last example).
 
 ## Installation
 
-You know the drill. Add this line to your application's Gemfile
-(presumably in the "development" or "test" group):
+You know the drill.
+
+Add this line to your application's Gemfile, presumably in the
+"development" or "test" group:
 
 ```ruby
 gem "duplo"
@@ -113,8 +123,8 @@ or install it yourself as:
 $ gem install duplo
 ```
 
-It's not exactly necessary to include the module, so you can work like
-this:
+It's not really necessary to include the module, you can use it
+directly:
 
 ```ruby
 Duplo.a2a2
