@@ -4,7 +4,7 @@ Duplo
 [![Gem Version](https://badge.fury.io/rb/duplo.svg)](https://rubygems.org/gems/duplo)
 [![Build Status](https://travis-ci.org/topalovic/duplo.svg?branch=master)](https://travis-ci.org/topalovic/duplo)
 
-Generate nested collections with minimum effort.
+Generate nested collections with minimum fuss.
 
 ```
  .-===============-.
@@ -17,9 +17,9 @@ Generate nested collections with minimum effort.
 ## Usage
 
 Let's say you like matrices (bear with me), but not rolling them out
-by hand or writing nested loops to populate them. Or you might need a
-few nested hashes to test something real quick in the console, but
-generating them can be a royal PITA.
+by hand or writing loops to populate them. Or you might need a few
+nested hashes to test something real quick in the console, but
+generating them can be a royal pain.
 
 So how about this:
 
@@ -33,39 +33,44 @@ a3a4
 
 Bam. A 3x4 matrix.
 
-Want it random? Sure. Pass it a block to populate the entries:
+Want it randomized? Just pass it a block to populate the entries:
 
 ```ruby
 a3a4 { rand -5..5 }
 # => [[1, 9, 8, 3], [3, 0, -1, -2], [2, 0, 5, -7]]
+
 a3a4 { rand }
 # => [[0.6222777300676433,  0.5613390139342668,  0.37293736375203324, 0.7319666374054961],
 #     [0.3798588109025701,  0.33483069318178915, 0.8779112502970073,  0.22476545143154103],
 #     [0.37651300630626683, 0.5035024403835663,  0.8237420938739567,  0.7611012983149591]]
 ```
 
-Accessing the current entry path is easy peasy. Have an identity
-matrix:
+### Entry path
+
+Accessing the entry path is easy peasy:
 
 ```ruby
 I4 = a4a4 { |i, j| i == j ? 1 : 0  }
 # => [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
 ```
 
-Have I mentioned that you can go up to an arbitrary number of
-dimensions?
+Have I mentioned that you can nest structures up to an arbitrary
+depth?
 
 ```ruby
-a3a3a2 { |i,j,k| [i,j,k].join(":") }
-# => [[["0:0:0", "0:0:1"], ["0:1:0", "0:1:1"], ["0:2:0", "0:2:1"]],
-#     [["1:0:0", "1:0:1"], ["1:1:0", "1:1:1"], ["1:2:0", "1:2:1"]],
-#     [["2:0:0", "2:0:1"], ["2:1:0", "2:1:1"], ["2:2:0", "2:2:1"]]]
+a4a11a3a2 { |path| path.join(":") }
+# => [[[["0:0:0:0", "0:0:0:1"], ["0:0:1:0", "0:0:1:1"], ["0:0:2:0", "0:0:2:1"]],
+#      [["0:1:0:0", "0:1:0:1"], ["0:1:1:0", "0:1:1:1"], ["0:1:2:0", "0:1:2:1"]],
+#       . . .
+#      [["3:10:0:0", "3:10:0:1"], ["3:10:1:0", "3:10:1:1"], ["3:10:2:0", "3:10:2:1"]]]]
 ```
 
-Heads up, it might get a bit sluggish with higher dims due to the
-recursive approach under the hood.
+(heads up though, it might get sluggish with higher orders due to
+recursion)
 
-Now how 'bout them Hashes:
+### Hashes
+
+How do you like dem Hashes?
 
 ```ruby
 h3h2h2 { |path| "I'm a #{path.join}" }
@@ -74,8 +79,10 @@ h3h2h2 { |path| "I'm a #{path.join}" }
 #     2=>{0=>{0=>"I'm a 200", 1=>"I'm a 201"}, 1=>{0=>"I'm a 210", 1=>"I'm a 211"}}}
 ```
 
-You can also use `s` for Sets, and mix and match collection types to
-your little heart's desire:
+### Sets and all together now
+
+You can use `s` for Sets, and mix and match collection types to your
+heart's desire:
 
 ```ruby
 ah2s3 { abc.sample(2).join }
@@ -86,16 +93,17 @@ ah2s3 { abc.sample(2).join }
 #     {0=>#<Set: {"oq", "vb", "ed"}>, 1=>#<Set: {"gq", "px", "sv"}>}]
 ```
 
-You get the picture. If you're *really* bored, you can spell those out
-loud:
+If you're, like, really bored, you can spell those out loud:
 
 ```ruby
-Duplo.spell "ah2s0"
-# => "5-element Array containing 2-element Hashes containing empty Sets"
+Duplo.spell "ah22s0"
+# => "5-element Array containing 22-element Hashes containing empty Sets"
 ```
 
+### Misc
+
 Note that I've omitted a dim for the root array in that last
-example. It defaults to 5, so `as2h` means the same thing as
+example. It defaults to 5, so `as2h` yields the same results as
 `a5s2h5`. You can easily change it like this:
 
 ```ruby
@@ -103,12 +111,10 @@ Duplo.default_size = 3
 ```
 
 Also, I sneaked in a cute little `abc` method that returns the
-alphabet as an array (as seen in the last example).
+alphabet as an array.
 
 
 ## Installation
-
-You know the drill.
 
 Add this line to your application's Gemfile, presumably in the
 "development" or "test" group:
@@ -123,8 +129,7 @@ or install it yourself as:
 $ gem install duplo
 ```
 
-It's not really necessary to include the module, you can use it
-directly:
+It's not necessary to include the module, this will work too:
 
 ```ruby
 Duplo.a2a2
@@ -138,11 +143,8 @@ My personal preference is to drop this in `.pryrc` (or `.irbrc`):
 
 
 ```ruby
-begin
-  require "duplo"
-  include Duplo
-rescue LoadError
-end
+require "duplo"
+include Duplo
 ```
 
 and have those handy shortcuts available in every session, `a` and `h`
