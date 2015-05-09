@@ -2,11 +2,11 @@ require "spec_helper"
 
 describe Duplo do
 
-  let(:default_size) { Duplo.default_size }
+  let(:default_size)   { Duplo.default_size }
   let(:valid_bricks)   { %w[a aa s ss h hh a0 a1h a2s33h44] }
   let(:invalid_bricks) { %w[A n 0 11 1s a2s33t44] }
 
-    it "has a version number" do
+  it "has a version number" do
     expect(Duplo::VERSION).not_to be nil
   end
 
