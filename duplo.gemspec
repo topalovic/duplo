@@ -12,8 +12,8 @@ Gem::Specification.new do |s|
   s.authors       = ["Nikola Topalović"]
   s.email         = ["nikola.topalovic@gmail.com"]
 
-  s.summary       = %q{Generating nested collections with minimum effort.}
-  s.description   = %q{Generating nested collections with minimum effort.}
+  s.summary       = %q{Generate nested collections with minimum effort.}
+  s.description   = %q{Generate nested collections with minimum effort.}
   s.homepage      = "https://github.com/topalovic/duplo"
   s.license       = "MIT"
 
