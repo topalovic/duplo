@@ -62,6 +62,12 @@ describe Duplo do
         expect(Duplo.build brick).to eq toy
       end
     end
+
+    it "raises error when given invalid brick" do
+      invalid_bricks.each do |brick|
+        expect { Duplo.build brick }.to raise_error
+      end
+    end
   end
 
   describe ".smash" do

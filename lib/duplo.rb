@@ -33,6 +33,8 @@ module Duplo
     end
 
     def build(part, path = [], &block)
+      raise %(Don't know how to build "#{part}", sorry) unless can_build? part
+
       part = part.dup
       brick = part.slice! BRICK
       type, size = crack brick
