@@ -4,7 +4,7 @@ Duplo
 [![Gem Version](https://badge.fury.io/rb/duplo.svg)](https://rubygems.org/gems/duplo)
 [![Build Status](https://travis-ci.org/topalovic/duplo.svg?branch=master)](https://travis-ci.org/topalovic/duplo)
 
-Generate nested collections with minimum fuss.
+Build nested collections with minimum fuss.
 
 ```
  .-===============-.
@@ -68,9 +68,19 @@ a4a11a3a2 { |path| path.join(":") }
 (heads up though, it might get sluggish with higher orders due to
 recursion)
 
+### Dynamic dimensions
+
+Want to provide dimensions dynamically? While there's no syntax for
+that (yet), this should get you covered:
+
+```ruby
+m, n = 3, 4
+Duplo.build "a#{m}a#{n}"
+```
+
 ### Hashes
 
-How do you like dem Hashes?
+Now, how do you like dem Hashes:
 
 ```ruby
 h3h2h2 { |path| "I'm a #{path.join}" }
@@ -81,7 +91,7 @@ h3h2h2 { |path| "I'm a #{path.join}" }
 
 ### Sets and all together now
 
-You can use `s` for Sets, and mix and match collection types to your
+You can use `s` for Sets and mix and match collection types to your
 heart's desire:
 
 ```ruby
@@ -99,8 +109,6 @@ If you're, like, really bored, you can spell those out loud:
 Duplo.spell "ah22s0"
 # => "5-element Array containing 22-element Hashes containing empty Sets"
 ```
-
-### Misc
 
 Note that I've omitted a dim for the root array in that last
 example. It defaults to 5, so `as2h` yields the same results as
