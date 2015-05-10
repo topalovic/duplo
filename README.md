@@ -6,12 +6,7 @@ Duplo
 
 Build nested collections with minimum fuss.
 
-```
- .-===============-.
- | ( ) ( ) ( ) ( ) |
- | ( ) ( ) ( ) ( ) |
- '-----------------' ndt.
-```
+![](https://cloud.githubusercontent.com/assets/626128/7554149/0511c2b8-f71d-11e4-9ee1-07b1707920cd.png)
 
 
 ## Usage
