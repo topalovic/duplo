@@ -70,11 +70,6 @@ module Duplo
 
   module_function
 
-  def abc(n = nil)
-    range = "a".."z"
-    n ? range.take(n) : range.to_a
-  end
-
   def respond_to_missing?(method_name, *)
     toy = method_name.to_s
     Duplo.can_build?(toy) || super

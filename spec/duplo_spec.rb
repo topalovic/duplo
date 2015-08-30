@@ -10,13 +10,6 @@ describe Duplo do
     expect(Duplo::VERSION).not_to be nil
   end
 
-  describe ".abc" do
-    it "provides alphabet" do
-      expect(Duplo.abc).to eq ("a".."z").to_a
-      expect(Duplo.abc 4).to eq ("a".."d").to_a
-    end
-  end
-
   describe ".respond_to?" do
     it "returns true for valid bricks" do
       valid_bricks.each do |brick|
