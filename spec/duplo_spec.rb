@@ -65,7 +65,23 @@ describe Duplo do
 
     it "raises error when given invalid brick" do
       invalid_bricks.each do |brick|
-        expect { Duplo.build brick }.to raise_error
+        expect { Duplo.build brick }.to raise_error RuntimeError
+      end
+    end
+
+    describe "when given a block" do
+      let(:block) { proc { |entry| entry.class } }
+
+      describe "when given one dimension" do
+        it "yields entry path as integer and populates entries" do
+          expect(Duplo.build "a1", &block).to eq [Fixnum]
+        end
+      end
+
+      describe "when given more than one dimension" do
+        it "yields entry path as array and populates entries" do
+          expect(Duplo.build "a1a1", &block).to eq [[Array]]
+        end
       end
     end
   end

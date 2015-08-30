@@ -41,8 +41,8 @@ module Duplo
       toy = type.new
 
       if part.empty?
-        _block = block_given? ? block : proc { |path| path.last }
-        size.times { |i| add toy, _block.call(path + [i]) }
+        block ||= proc { |path| path.is_a?(Array) ? path.last : path }
+        size.times { |i| add toy, block.call(path.empty? ? i : path + [i]) }
       else
         size.times { |i| add toy, build(part, path + [i], &block) }
       end
