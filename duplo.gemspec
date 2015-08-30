@@ -8,7 +8,7 @@ require "duplo/version"
 Gem::Specification.new do |s|
   s.name          = "duplo"
   s.version       = Duplo::VERSION
-  s.date          = "2015-05-09"
+  s.date          = "2015-08-30"
   s.authors       = ["Nikola Topalović"]
   s.email         = ["nikola.topalovic@gmail.com"]
 
