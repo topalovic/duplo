@@ -63,17 +63,17 @@ describe Duplo do
     end
 
     describe "when given a block" do
-      let(:block) { proc { |entry| entry.class } }
+      let(:block) { proc { |entry| entry } }
 
       describe "when given one dimension" do
-        it "yields entry path as integer and populates entries" do
-          expect(Duplo.build "a1", &block).to eq [Fixnum]
+        it "yields entry path as integer" do
+          expect(Duplo.build "a2", &block).to all be_an Integer
         end
       end
 
       describe "when given more than one dimension" do
-        it "yields entry path as array and populates entries" do
-          expect(Duplo.build "a1a1", &block).to eq [[Array]]
+        it "yields entry path as array" do
+          expect(Duplo.build "a2a2", &block).to all be_an Array
         end
       end
     end
