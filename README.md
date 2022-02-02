@@ -2,6 +2,7 @@ Duplo
 =====
 
 [![Gem Version](https://badge.fury.io/rb/duplo.svg)](https://rubygems.org/gems/duplo)
+[![tests](https://github.com/topalovic/duplo/actions/workflows/tests.yml/badge.svg)](https://github.com/topalovic/duplo/actions/workflows/tests.yml)
 
 A tiny Ruby DSL for generating collections.
 
