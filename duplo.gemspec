@@ -28,8 +28,8 @@ Gem::Specification.new do |s|
 
   s.test_files = Dir['spec/**/*_spec.rb']
 
-  s.add_development_dependency "rake", "~> 10.0"
+  s.add_development_dependency "rake", "~> 13.0"
   s.add_development_dependency "rspec", "~> 3.2"
 
-  s.required_ruby_version = ">= 1.9.2"
+  s.required_ruby_version = ">= 2.2.0"
 end
